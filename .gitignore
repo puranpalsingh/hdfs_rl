@@ -1,0 +1,59 @@
+# === Python ===
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+.eggs/
+.installed.cfg
+lib/
+lib64/
+
+# === Virtual Environments ===
+.venv/
+venv/
+env/
+ENV/
+
+# === Testing ===
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+
+# === Jupyter Notebooks (outputs only; keep .ipynb) ===
+.ipynb_checkpoints/
+
+# === IDE / Editor ===
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# === Large binaries / submission artifacts ===
+*.zip
+*.pptx
+report.pdf
+
+# === Trained model weights & training logs ===
+# Keep configs and source; exclude heavy training output dirs
+ppo_agent/
+ppo_agent_phase2/
+ppo_agent_phase3/
+ppo_agent_phase4/
+ppo_agent_*/
+*.log
+
+# === Architecture diagram (binary, regeneratable) ===
+hdfs_architecture_diagram
+
+# === Tensorboard logs (regeneratable) ===
+*/tensorboard/
+
+# === OS generated ===
+*.DS_Store
