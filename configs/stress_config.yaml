@@ -1,0 +1,24 @@
+cluster:
+  num_racks: 3
+  nodes_per_rack: 4
+  node_capacity_gb: 100.0
+  num_files: 20
+  file_size_range: [1.0, 10.0]
+  max_replication: 5
+
+episode:
+  max_steps: 100
+  time_step_hours: 1.0
+
+reward:
+  alpha: 1.0
+  beta: 5.0
+  gamma: 50.0
+  delta: 0.5
+  access_threshold: 2
+
+failure:
+  node_mtbf_hours: 200.0      # 10x more frequent node failures
+  node_mttr_hours: 24.0       # 6x longer to repair
+  rack_mtbf_hours: 1000.0     # 20x more frequent rack failures
+  rack_mttr_hours: 48.0       # 6x longer to repair

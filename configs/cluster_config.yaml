@@ -1,0 +1,37 @@
+# Default cluster configuration for the HDFS Replication Simulator.
+#
+# These parameters define a small-but-realistic cluster that's big enough
+# for the RL agent to learn meaningful placement strategies, but small enough
+# for fast training (~5 episodes/second on a single CPU).
+
+cluster:
+  num_racks: 3
+  nodes_per_rack: 4
+  node_capacity_gb: 100.0
+  num_files: 20
+  file_size_range: [1.0, 10.0]
+  max_replication: 5
+
+episode:
+  max_steps: 100
+  time_step_hours: 1.0
+
+reward:
+  alpha: 1.0     # Storage cost weight
+  beta: 5.0      # Unavailability weight
+  gamma: 50.0    # Data loss weight (catastrophic in fintech)
+  delta: 0.5     # Access bonus weight
+  access_threshold: 2  # Min replicas for access bonus
+
+# Failure model parameters (used starting Phase 2)
+# MTBF is set relative to episode length (100 steps = 100 simulated hours).
+# node_mtbf_hours=2000 → ~0.05% failure per node per step → ~0.5% chance
+# of ANY node failing per step → ~0.5 expected failures per 100-step episode.
+# This is realistic and learnable: the agent WILL occasionally lose data if
+# it uses replication=1, but not so often that the reward variance prevents
+# PPO from converging (explained_variance was 0 at the old 200-hour MTBF).
+failure:
+  node_mtbf_hours: 2000.0     # Mean time between failures per node
+  node_mttr_hours: 4.0        # Mean time to repair per node
+  rack_mtbf_hours: 20000.0    # Mean time between rack-level failures
+  rack_mttr_hours: 8.0        # Mean time to repair a rack
